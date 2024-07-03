@@ -5,8 +5,9 @@ process IDENTIFY_BEST_SEGMENTS_FROM_SAM {
     conda "${moduleDir}/environment.yml"
         
 	input: 
-    tuple val(meta), path(input), path(reference)
-
+	tuple val(meta), path(input)
+    tuple val(meta2), path(reference)
+	
 	output: 
 	tuple val(meta), path("*.fa") , emit: fa
 

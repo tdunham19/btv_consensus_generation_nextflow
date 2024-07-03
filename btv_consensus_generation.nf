@@ -16,7 +16,7 @@ include { BCFTOOLS_CALL 	 				   			 	 } from './modules/local/bcftools/call/mai
 include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_CONS	 			 } from './modules/local/bcftools/index/main.nf'
 include { BCFTOOLS_CONSENSUS					 			 } from './modules/local/bcftools/consensus/main.nf'
 include { REMOVE_TRAILING_FASTA_NS					 		 } from './modules/local/remove_trailing_fasta_ns/main.nf'
-include { SED										 		 } from './modules/local/sed/main.nf'
+include { SED as FINAL_CONSENSUS_SEQUENCE					 } from './modules/local/sed/main.nf'
 
 workflow BTV_CONSENSUS {
 
@@ -61,7 +61,7 @@ workflow BTV_CONSENSUS {
   SAMTOOLS_INDEX_ALIGNMENT ( SAMTOOLS_SORT_ALIGNMENT.out.bam )
   
   // extract new fasta file containing best aligned-to seqs for this dataset
-  IDENTIFY_BEST_SEGMENTS_FROM_SAM ( MINIMAP2_ALIGN_TO_EXISTING.out.sam.join(ch_reference))
+  IDENTIFY_BEST_SEGMENTS_FROM_SAM ( MINIMAP2_ALIGN_TO_EXISTING.out.sam, ch_reference )
   
   // re-minimap data against best 10 BTV ref seqs.
   MINIMAP2_ALIGN_TO_NEW_DRAFT ( IDENTIFY_BEST_SEGMENTS_FROM_SAM.out.fa.join(ch_reads))
@@ -108,7 +108,7 @@ workflow BTV_CONSENSUS {
   REMOVE_TRAILING_FASTA_NS ( BCFTOOLS_CONSENSUS.out.fa )
   
   // pipe output through a sed to append new_X_draft_sequence to name of fasta record
-  SED ( REMOVE_TRAILING_FASTA_NS.out.fa )
+  FINAL_CONSENSUS_SEQUENCE ( REMOVE_TRAILING_FASTA_NS.out.fa )
   
   }
   
