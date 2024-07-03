@@ -61,7 +61,7 @@ workflow BTV_CONSENSUS {
   SAMTOOLS_INDEX_ALIGNMENT ( SAMTOOLS_SORT_ALIGNMENT.out.bam )
   
   // extract new fasta file containing best aligned-to seqs for this dataset
-  IDENTIFY_BEST_SEGMENTS_FROM_SAM ( MINIMAP2_ALIGN_TO_EXISTING.out.sam, ch_reference )
+  IDENTIFY_BEST_SEGMENTS_FROM_SAM ( MINIMAP2_ALIGN_TO_EXISTING.out.sam.join(ch_reference))
   
   // re-minimap data against best 10 BTV ref seqs.
   MINIMAP2_ALIGN_TO_NEW_DRAFT ( IDENTIFY_BEST_SEGMENTS_FROM_SAM.out.fa.join(ch_reads))
