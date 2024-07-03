@@ -8,8 +8,7 @@ process BCFTOOLS_MPILEUP {
         'biocontainers/bcftools:1.20--h8b25389_0' }"
 
     input:
-    tuple val(meta), path(input)
-    tuple val(meta2), path(best10refseq)
+    tuple val(meta), path(input), path(best10refseq)
 
     output:
     tuple val(meta), path("*vcf")     , emit: vcf

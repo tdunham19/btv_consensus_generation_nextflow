@@ -8,8 +8,7 @@ container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity
         'biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:3161f532a5ea6f1dec9be5667c9efc2afdac6104-0' }"
 
 input:
-tuple val(meta),  path(reads)
-tuple val(meta2), path(input)
+tuple val(meta),  path(reads), path(input)
 
 output:
 tuple val(meta), path("*.sam")                       , emit: sam

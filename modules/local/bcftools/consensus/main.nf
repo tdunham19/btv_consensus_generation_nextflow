@@ -8,9 +8,7 @@ process BCFTOOLS_CONSENSUS {
         'biocontainers/bcftools:1.20--h8b25389_0' }"
 
     input:
-    tuple val(meta), path(mask)
-    tuple val(meta2), path(best10refseq)
-    tuple val(meta3), path(cons), path(csi)
+    tuple val(meta), path(mask), path(best10refseq), path(cons), path(csi)
 
     output:
     tuple val(meta), path('*.fa'), emit: fa
