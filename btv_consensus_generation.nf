@@ -64,7 +64,7 @@ workflow BTV_CONSENSUS {
   IDENTIFY_BEST_SEGMENTS_FROM_SAM ( MINIMAP2_ALIGN_TO_EXISTING.out.sam, ch_reference )
   
   // re-minimap data against best 10 BTV ref seqs.
-  MINIMAP2_ALIGN_TO_NEW_DRAFT ( IDENTIFY_BEST_SEGMENTS_FROM_SAM.out.fa.join(ch_reads))
+  MINIMAP2_ALIGN_TO_NEW_DRAFT ( ch_reads.join(IDENTIFY_BEST_SEGMENTS_FROM_SAM.out.fa))
   
   // run samtools to process minimap2 alignment again - view
   SAMTOOLS_VIEW_BEST10_ALIGNMENT ( MINIMAP2_ALIGN_TO_NEW_DRAFT.out.sam )
