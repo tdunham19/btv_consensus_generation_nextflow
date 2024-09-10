@@ -16,6 +16,19 @@ The input to this pipeline is:
   nextflow run btv_consensus_generation.nf
   ```
 
+## Pipeline Steps
+1. Minimap2 align - aligns input fastq to BTV reference
+2. Samtools view/sort/index
+3. Identify best segments from sam - custom script written by Mark Stenglein to identify the 10 best references
+4. Minimap2 align - aligns input fastq to best 10 BTV references
+5. Samtools view/sort/index/faidx
+6. Lofreq call - calls variants
+7. Create mask file - custom script written by Mark Stenglein to create mask file for consensus generation
+8. Bcftools view/index/call
+9. Bcftools consensus - generates consensus sequence
+10. Remove trailing fasta Ns - custom script written by Mark Stenglein to remove tailing N's from consensus sequence
+11. Sed - rename final consensus sequence file
+
 ## Output 
 All output will be located in the directory /results
 
