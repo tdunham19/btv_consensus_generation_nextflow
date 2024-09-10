@@ -6,3 +6,6 @@ This pipeline is written in nextflow and generates a consensus sequence for Blue
 The input to this pipeline is: 
   Concatenated fastq file of all long reads for the sample.
   BTV reference sequence.
+
+  To run the pipeline
+  nextflow run btv_consensus_generation.nf
