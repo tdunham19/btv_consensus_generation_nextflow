@@ -1,6 +1,6 @@
 process IDENTIFY_BEST_SEGMENTS_FROM_SAM {
     tag "$meta.id"
-    label "no_publish"
+//    label "no_publish"
     
     conda "${moduleDir}/environment.yml"
         

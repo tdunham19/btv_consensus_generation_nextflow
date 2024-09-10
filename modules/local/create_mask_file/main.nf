@@ -1,6 +1,6 @@
 process CREATE_MASK_FILE {
     tag "$meta.id"
-    label "no_publish"
+//    label "no_publish"
     
     conda "${moduleDir}/environment.yml"
         

@@ -8,7 +8,7 @@ include { SAMTOOLS_VIEW	 as SAMTOOLS_VIEW_BEST10_ALIGNMENT   } from './modules/l
 include { SAMTOOLS_SORT  as SAMTOOLS_SORT_BEST10_ALIGNMENT   } from './modules/local/samtools/sort/main.nf'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_BEST10_ALIGNMENT  } from './modules/local/samtools/index/main.nf'
 include { SAMTOOLS_FAIDX  							     	 } from './modules/local/samtools/faidx/main.nf'
-include { BCFTOOLS_MPILEUP 					   			 	 } from './modules/local/bcftools/mpileup/main.nf'
+include { BCFTOOLS_MPILEUP	 					   			 } from './modules/local/bcftools/mpileup/main.nf'
 include { CREATE_MASK_FILE				       			 	 } from './modules/local/create_mask_file/main.nf'
 include { BCFTOOLS_VIEW	 					   			 	 } from './modules/local/bcftools/view/main.nf'
 include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_BCF	 			 } from './modules/local/bcftools/index/main.nf'
@@ -82,7 +82,7 @@ workflow BTV_CONSENSUS {
   // have to make a .fai file to make mpileup happy
   SAMTOOLS_FAIDX ( IDENTIFY_BEST_SEGMENTS_FROM_SAM.out.fa )
   
-  // mpileup calls variants -> output is a vcf file
+  // lofreq calls variants -> output is a vcf file
   BCFTOOLS_MPILEUP ( SAMTOOLS_SORT_BEST10_ALIGNMENT.out.bam.join(IDENTIFY_BEST_SEGMENTS_FROM_SAM.out.fa))
   
   // this script creates a mask file
