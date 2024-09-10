@@ -22,7 +22,7 @@ The input to this pipeline is:
 3. Identify best segments from sam - custom script written by Mark Stenglein to identify the 10 best references
 4. Minimap2 align - aligns input fastq to best 10 BTV references
 5. Samtools view/sort/index/faidx
-6. Lofreq call - calls variants
+6. Bcftools mpileup - calls variants
 7. Create mask file - custom script written by Mark Stenglein to create mask file for consensus generation
 8. Bcftools view/index/call
 9. Bcftools consensus - generates consensus sequence
@@ -34,4 +34,3 @@ All output will be located in the directory /results
 
 /results/final will contain the final consensus sequence generated.
 /results/minimap2 will contain the alignments to the reference.
-/results/lofreq will contain the variant called .vcf file.
