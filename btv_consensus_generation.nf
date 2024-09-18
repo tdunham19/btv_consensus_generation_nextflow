@@ -26,7 +26,7 @@ workflow BTV_CONSENSUS {
 
   Channel.fromFilePairs("${params.fastq_dir}/${params.input_pattern}", size: -1, checkIfExists: true, maxDepth: 1)
   .map{ name, reads ->
-         def matcher = name =~ /FABADRU_\d+/
+         def matcher = name =~ /^([^.]+)/
          def meta = [:]
          if (matcher.find()) {
              meta.id = matcher.group(0)
