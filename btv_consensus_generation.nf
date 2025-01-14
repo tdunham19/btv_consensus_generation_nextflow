@@ -17,6 +17,7 @@ include { BCFTOOLS_INDEX as BCFTOOLS_INDEX_CONS	 			 } from './modules/local/bcf
 include { BCFTOOLS_CONSENSUS					 			 } from './modules/local/bcftools/consensus/main.nf'
 include { REMOVE_TRAILING_FASTA_NS					 		 } from './modules/local/remove_trailing_fasta_ns/main.nf'
 include { SED as FINAL_CONSENSUS_SEQUENCE					 } from './modules/local/sed/main.nf'
+include { MINIMAP2_ALIGN as MINIMAP2_ALIGN_TO_FINAL		  	 } from './modules/local/minimap2/align/main3.nf'
 
 workflow BTV_CONSENSUS {
 
@@ -109,6 +110,9 @@ workflow BTV_CONSENSUS {
   
   // pipe output through a sed to append new_X_draft_sequence to name of fasta record
   FINAL_CONSENSUS_SEQUENCE ( REMOVE_TRAILING_FASTA_NS.out.fa )
+
+  // re-minimap data against the new draft sequence (ie. final consensus sequence)
+  MINIMAP2_ALIGN_TO_FINAL ( ch_reads.join(BCFTOOLS_CONSENSUS.out.fa))
   
   }
   

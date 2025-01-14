@@ -4,3 +4,4 @@ fastq/
 reference/
 .nextflow.lo*
 .nextflow/
+/*.fasta
